@@ -43,6 +43,8 @@ namespace SmartWeatherBot
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IWeatherRepository, WeatherRepository>();
 
+            services.AddTransient<IWeatherClient, WeatherClient>();
+
             services.AddControllers()
                 .AddJsonOptions(options => { options.JsonSerializerOptions.IgnoreNullValues = true; });
         }
