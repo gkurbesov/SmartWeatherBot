@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmartWeatherBot.Weather
 {
-    public class WeatherClient : BaseRestClient, IOpenWeatherMapClient
+    public class WeatherClient : BaseRestClient, IWeatherClient
     {
         private readonly OpenWeatherConfig config;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SmartWeatherBot.Weather
 {
-    public interface IOpenWeatherMapClient
+    public interface IWeatherClient
     {
         Task<WeatherData> GetWeatherAsync(double lat, double lon);
     }
