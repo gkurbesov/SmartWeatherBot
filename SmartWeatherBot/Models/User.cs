@@ -13,5 +13,7 @@ namespace SmartWeatherBot.Models
         public double Lon { get; set; } = 0;
         public bool SendChange { get; set; } = false;
         public DateTime TimeStart { get; set; } = DateTime.Now;
+
+        public bool IsValidLocation() => Lat != 0 && Lon != 0;
     }
 }
