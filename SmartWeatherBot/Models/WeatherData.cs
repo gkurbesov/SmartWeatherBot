@@ -26,7 +26,7 @@ namespace SmartWeatherBot.Models
         /// </summary>
         [JsonProperty("wind")]
         [JsonPropertyName("wind")]
-        public WeatherState Wind { get; set; }
+        public WindState Wind { get; set; }
         /// <summary>
         /// Облачность
         /// </summary>
