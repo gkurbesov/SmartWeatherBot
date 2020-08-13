@@ -8,7 +8,7 @@ namespace SmartWeatherBot.Weathers
 {
     public class BaseRestClient
     {
-        public string BaseUrl { get; set; } = "http://localhost/";
+        public string BaseUrl { get; set; } = "https://api.openweathermap.org/";
         public int Timeout { get; set; } = 30;
 
         public BaseRestClient() { }

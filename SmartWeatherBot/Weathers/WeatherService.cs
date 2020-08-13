@@ -17,7 +17,7 @@ namespace SmartWeatherBot.Weathers
         {
             config = options.Value;
             repo = repository;
-            SetBaseUrl("https://samples.openweathermap.org/");
+            SetBaseUrl("https://api.openweathermap.org/");
         }
 
 
