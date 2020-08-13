@@ -1,5 +1,6 @@
 ﻿using SmartWeatherBot.Bot;
 using SmartWeatherBot.Database;
+using SmartWeatherBot.Messages;
 using SmartWeatherBot.Models;
 using SmartWeatherBot.Weathers;
 using System;
@@ -46,7 +47,7 @@ namespace SmartWeatherBot
                     var weatherStatus = await _weather.GetWeatherAsync(user.Lat, user.Lon);
                     if (weatherStatus != null)
                     {
-                        await SendAsync(chatId, $"Текущая температура: {weatherStatus.Temp}\r\nОщущается как: {weatherStatus.TempLike}");
+                        await SendAsync(chatId, WeatherMessageBuilder.Smart(weatherStatus));
                     }
                     else
                     {
