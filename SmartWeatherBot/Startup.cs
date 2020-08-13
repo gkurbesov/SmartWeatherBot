@@ -49,9 +49,6 @@ namespace SmartWeatherBot
             services.AddTransient<IWeatherService, WeatherService>();
 
             services.AddHostedService<HostService>();
-
-            services.AddControllers()
-                .AddJsonOptions(options => { options.JsonSerializerOptions.IgnoreNullValues = true; });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,7 +58,6 @@ namespace SmartWeatherBot
                 app.UseDeveloperExceptionPage();
             }
             app.UseRouting();
-            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
