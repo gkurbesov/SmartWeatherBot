@@ -19,7 +19,7 @@ namespace SmartWeatherBot.Database
         public async Task<User> GetUser(int index) =>
             await this.GetAsync<User>(index);
 
-        public async Task<User> GetUserTelegram(int telegram_id) =>
+        public async Task<User> GetUserTelegram(long telegram_id) =>
             await this.FirstAsync<User>(o => o.TelegramID == telegram_id);
 
         public async Task<User> InsertAsync(User value)
