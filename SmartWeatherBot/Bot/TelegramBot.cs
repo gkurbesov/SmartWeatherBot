@@ -29,7 +29,7 @@ namespace SmartWeatherBot.Bot
         {
             var commands = new BotCommand[]
             {
-                 new BotCommand(){Command = "/weather", Description = "Получить текущую температуру"},
+                 new BotCommand(){Command = "/weather", Description = "Получить текущий прогноз погоды"},
                  new BotCommand(){Command = "/location", Description = "Изменить гео-локацию для получения прогноза"},
                  new BotCommand(){Command = "/update", Description = "Сообщать свежий прогноз погоды"},
             };
