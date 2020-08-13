@@ -36,7 +36,7 @@ namespace SmartWeatherBot.Database
             }
         }
 
-        public async Task<bool> UpdateAsync(User value) =>
+        public async Task<bool> UpdateUserAsync(User value) =>
             await this.UpdateAsync(value);
 
         public async Task<bool> DeleteAsync(int index) =>

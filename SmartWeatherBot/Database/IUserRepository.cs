@@ -11,7 +11,7 @@ namespace SmartWeatherBot.Database
         Task<User> GetUser(int index);
         Task<User> GetUserTelegram(long telegram_id);
         Task<User> InsertAsync(User value);
-        Task<bool> UpdateAsync(User value);
+        Task<bool> UpdateUserAsync(User value);
         Task<bool> DeleteAsync(int index);
     }
 }
