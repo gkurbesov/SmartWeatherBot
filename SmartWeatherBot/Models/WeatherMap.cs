@@ -15,6 +15,7 @@ namespace SmartWeatherBot.Models
             Map(o => o.Lat).ToColumn("location_lat");
             Map(o => o.Lon).ToColumn("location_lon");
             Map(o => o.Temp).ToColumn("temp");
+            Map(o => o.TempLike).ToColumn("temp_like");
             Map(o => o.Humidity).ToColumn("hum");
             Map(o => o.Cloudiness).ToColumn("cloud");
             Map(o => o.WindSpeed).ToColumn("wind");
