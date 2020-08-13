@@ -15,6 +15,7 @@ using SmartWeatherBot.Database;
 using SmartWeatherBot.Models;
 using SmartWeatherBot.Bot;
 using SmartWeatherBot.Weathers;
+using Microsoft.AspNetCore.Http;
 
 namespace SmartWeatherBot
 {
@@ -63,7 +64,10 @@ namespace SmartWeatherBot
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapGet("/", async context =>
+                {
+                    await context.Response.WriteAsync("SmartWetherBot is running!");
+                });
             });
         }
     }
