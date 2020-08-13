@@ -110,7 +110,7 @@ namespace SmartWeatherBot
 
         protected override async Task OnReceiveUpdateRequest(long chatId)
         {
-            return;
+            await SendAsync(chatId, "Пока я не могу присылать ежедневный прогноз погоды. Попробуй позже :)");
         }
 
         protected override async Task SendAsync(long chatId, string message)
