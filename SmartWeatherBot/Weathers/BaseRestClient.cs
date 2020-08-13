@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace SmartWeatherBot.Weather
+namespace SmartWeatherBot.Weathers
 {
     public class BaseRestClient
     {

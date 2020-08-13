@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartWeatherBot.Weather
+namespace SmartWeatherBot.Weathers
 {
-    public interface IWeatherClient
+    public interface IWeatherService
     {
-        Task<WeatherData> GetWeatherAsync(double lat, double lon);
+        Task<Weather> GetWeatherAsync(double lat, double lon);
     }
 }
