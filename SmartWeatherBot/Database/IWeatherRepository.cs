@@ -9,7 +9,7 @@ namespace SmartWeatherBot.Database
     public interface IWeatherRepository
     {
         Task<IEnumerable<Weather>> GetAllAsync();
-        Task<Weather> GetLast(double lat, double lon);
+        Task<Weather> GetLastAsync(double lat, double lon);
         Task<Weather> InsertAsync(Weather value);
     }
 }
