@@ -17,7 +17,7 @@ namespace SmartWeatherBot.Database
         public async Task<IEnumerable<Weather>> GetAllAsync() =>
             await this.GetAllAsync<Weather>();
 
-        public async Task<Weather> GetLast(double lat, double lon) =>
+        public async Task<Weather> GetLastAsync(double lat, double lon) =>
             (await this.QueryAsync<Weather>("SELECT * FROM tbl_weather_cache WHERE location_lat = @Lat AND location_lon = @Lon ORDER BY ID DESC LIMIT 1",
                 new { Lat = lat, Lon = lon})).FirstOrDefault();
         
