@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 
-namespace SmartWeatherBot.Telegram
+namespace SmartWeatherBot.Bot
 {
     public interface ITelegramBot
     {

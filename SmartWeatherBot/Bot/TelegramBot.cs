@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace SmartWeatherBot.Telegram
+namespace SmartWeatherBot.Bot
 {
     public class TelegramBot : ITelegramBot
     {
@@ -29,9 +29,9 @@ namespace SmartWeatherBot.Telegram
         {
             var commands = new BotCommand[]
             {
-                 new BotCommand(){Command = "/status", Description = "Получить текущую температуру"},
+                 new BotCommand(){Command = "/weather", Description = "Получить текущую температуру"},
                  new BotCommand(){Command = "/location", Description = "Изменить гео-локацию для получения прогноза"},
-                 new BotCommand(){Command = "/news", Description = "Сообщать свежий прогноз погоды"},
+                 new BotCommand(){Command = "/update", Description = "Сообщать свежий прогноз погоды"},
             };
             Bot?.SetMyCommandsAsync(commands);
         }
