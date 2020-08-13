@@ -38,6 +38,7 @@ namespace SmartWeatherBot.Weathers
                         Humidity = update.State.Humidity,
                         Cloudiness = update.Clouds.All,
                         WindSpeed = (int)update.Wind.Speed,
+                        Pressure = update.State.Pressure
                     };
                     await repo.InsertAsync(data);
                 }
