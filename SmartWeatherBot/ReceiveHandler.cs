@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace SmartWeatherBot
 {
@@ -14,7 +15,7 @@ namespace SmartWeatherBot
         IWeatherService _weather;
         IUserRepository _users;
 
-        public ReceiveHandler(ITelegramBot telegramBot, 
+        public ReceiveHandler(ITelegramBot telegramBot,
             IWeatherService weatherService,
             IUserRepository repository) : base(telegramBot)
         {
@@ -25,7 +26,7 @@ namespace SmartWeatherBot
         protected override async Task CheckUser(long chatId)
         {
             var user = await _users.GetUserTelegram(chatId);
-            if(user == null)
+            if (user == null)
             {
                 user = new User()
                 {
@@ -38,12 +39,12 @@ namespace SmartWeatherBot
         protected override async Task OnReceiveWeather(long chatId)
         {
             var user = await _users.GetUserTelegram(chatId);
-            if(user != null)
+            if (user != null)
             {
                 if (user.IsValidLocation())
                 {
                     var weatherStatus = await _weather.GetWeatherAsync(user.Lat, user.Lon);
-                    if(weatherStatus != null)
+                    if (weatherStatus != null)
                     {
                         await SendAsync(chatId, $"Текущая температура: {weatherStatus.Temp}\r\nОщущается как: {weatherStatus.TempLike}");
                     }
@@ -59,9 +60,42 @@ namespace SmartWeatherBot
             }
         }
 
-        protected override Task OnReceiveLocation(long chatId)
+        protected override async Task OnReceiveLocation(long chatId)
         {
-            throw new NotImplementedException();
+            var keyboard = new ReplyKeyboardMarkup(new[]
+                {
+                    KeyboardButton.WithRequestLocation("Location")
+                }, false, true);
+            var msg = await _bot.Bot?.SendTextMessageAsync(
+                chatId: chatId,
+                text: "Скорее жми кнопку и я получу твои координаты!",
+                replyMarkup: keyboard
+            );
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(5000);
+                _ = _bot.Bot.DeleteMessageAsync(chatId, msg.MessageId);
+            });
+        }
+
+
+        protected override async Task OnReceiveSetLocation(long chatId, double lat, double lon)
+        {
+            var user = await _users.GetUserTelegram(chatId);
+            if (user != null)
+            {
+                user.Lat = lat;
+                user.Lon = lon;
+                var result = await _users.UpdateUserAsync(user);
+                if (result)
+                {
+                    await SendAsync(chatId, $"Отлично, теперь я могу сообщать погоду!");
+                }
+                else
+                {
+                    await SendAsync(chatId, $"Что то пошло не так, попробуйте позже");
+                }
+            }
         }
 
         protected override async Task OnReceiveStart(long chatId, string username)
@@ -74,14 +108,22 @@ namespace SmartWeatherBot
             await SendAsync(chatId, "Я не понимаю тебя, человек");
         }
 
-        protected override Task OnReceiveUpdateRequest(long chatId)
+        protected override async Task OnReceiveUpdateRequest(long chatId)
         {
-            throw new NotImplementedException();
+            return;
         }
 
         protected override async Task SendAsync(long chatId, string message)
         {
-            await _bot.Bot.SendTextMessageAsync(chatId, message);
+            try
+            {
+                await _bot.Bot.SendTextMessageAsync(
+                    chatId: chatId,
+                    text: message,
+                    replyMarkup: null
+                    );
+            }
+            catch { }
         }
     }
 }

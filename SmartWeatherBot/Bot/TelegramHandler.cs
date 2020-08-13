@@ -25,25 +25,28 @@ namespace SmartWeatherBot.Bot
 
         private void OnMessage(Message Message)
         {
-            CheckUser(Message.Chat.Id).Wait();
+            var chatId = Message.Chat.Id;
+
+            CheckUser(chatId).Wait();
             switch (Message.Type)
             {
                 case Telegram.Bot.Types.Enums.MessageType.Text:
                     var action = (Message.Text.Split(' ').First()) switch
                     {
-                        "/start" => OnReceiveStart(Message.Chat.Id, Message.Chat.Username),
-                        "/weather" => OnReceiveWeather(Message.Chat.Id),
-                        "/location" => OnReceiveLocation(Message.Chat.Id),
-                        "/update" => OnReceiveUpdateRequest(Message.Chat.Id),
-                        _ => OnReceiveUnknown(Message.Chat.Id)
+                        "/start" => OnReceiveStart(chatId, Message.Chat.Username),
+                        "/weather" => OnReceiveWeather(chatId),
+                        "/location" => OnReceiveLocation(chatId),
+                        "/update" => OnReceiveUpdateRequest(chatId),
+                        _ => OnReceiveUnknown(chatId)
                     };
                     action.Wait();
                     break;
                 case Telegram.Bot.Types.Enums.MessageType.Location:
-
+                    if (Message.Location != null)
+                        OnReceiveSetLocation(chatId, Message.Location.Latitude, Message.Location.Longitude).Wait();
                     break;
                 default:
-                    OnReceiveUnknown(Message.Chat.Id).Start();
+                    OnReceiveUnknown(chatId).Wait();
                     break;
             }
         }
@@ -51,6 +54,7 @@ namespace SmartWeatherBot.Bot
         protected abstract Task CheckUser(long chatId);
         protected abstract Task OnReceiveStart(long chatId, string username);
         protected abstract Task OnReceiveLocation(long chatId);
+        protected abstract Task OnReceiveSetLocation(long chatId, double lat, double lon);
         protected abstract Task OnReceiveWeather(long chatId);
         protected abstract Task OnReceiveUpdateRequest(long chatId);
         protected abstract Task OnReceiveUnknown(long chatId);
