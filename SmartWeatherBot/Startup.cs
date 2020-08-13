@@ -13,8 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SmartWeatherBot.Database;
 using SmartWeatherBot.Models;
-using SmartWeatherBot.Telegram;
-using SmartWeatherBot.Weather;
+using SmartWeatherBot.Bot;
+using SmartWeatherBot.Weathers;
 
 namespace SmartWeatherBot
 {
@@ -43,7 +43,11 @@ namespace SmartWeatherBot
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IWeatherRepository, WeatherRepository>();
 
-            services.AddTransient<IWeatherClient, WeatherClient>();
+            services.AddSingleton<ITelegramBot, TelegramBot>();
+            services.AddSingleton<TelegramHandler, ReceiveHandler>();
+            services.AddTransient<IWeatherService, WeatherService>();
+
+            services.AddHostedService<HostService>();
 
             services.AddControllers()
                 .AddJsonOptions(options => { options.JsonSerializerOptions.IgnoreNullValues = true; });
