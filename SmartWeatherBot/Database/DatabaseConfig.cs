@@ -10,7 +10,8 @@ namespace SmartWeatherBot.Database
         public string FilePath { get; set; } = string.Empty;
         public string FileName { get; set; } = string.Empty;
 
-        public ISqlConfig GetSqlConfig() => new SQLiteConfig(FilePath, FileName)
+        public ISqlConfig GetSqlConfig() =>
+            new SQLiteConfig(!string.IsNullOrWhiteSpace(FilePath) ? FilePath : AppDomain.CurrentDomain.BaseDirectory, FileName)
             .SetJournalMode(JournalModeType.MEMORY)
             .SetSynchronous(SynchronousType.OFF)
             .SetAutoVacuum(AutoVacuumType.FULL);
