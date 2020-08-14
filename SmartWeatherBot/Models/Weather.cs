@@ -8,8 +8,8 @@ namespace SmartWeatherBot.Models
     public class Weather
     {
         public long Index { get; set; } = -1;
-        public double Lat { get; set; } = 0;
-        public double Lon { get; set; } = 0;
+        public double Lat { get; set; } = 55.753215;
+        public double Lon { get; set; } = 37.622504;
         /// <summary>
         /// Фактическая температура
         /// </summary>
