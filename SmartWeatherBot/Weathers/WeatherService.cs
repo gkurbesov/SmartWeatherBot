@@ -38,7 +38,8 @@ namespace SmartWeatherBot.Weathers
                         Humidity = update.State.Humidity,
                         Cloudiness = update.Clouds.All,
                         WindSpeed = (int)update.Wind.Speed,
-                        Pressure = update.State.Pressure
+                        Pressure = update.State.Pressure,
+                        IsRain = update.Weathers.FindIndex(o=> (o.Id>= 500 && o.Id <= 531) || (o.Id >= 200 && o.Id <= 232)) >= 0
                     };
                     await repo.InsertAsync(data);
                 }

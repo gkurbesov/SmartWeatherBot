@@ -20,6 +20,7 @@ namespace SmartWeatherBot.Models
             Map(o => o.Cloudiness).ToColumn("cloud");
             Map(o => o.WindSpeed).ToColumn("wind");
             Map(o => o.Pressure).ToColumn("pressure");
+            Map(o => o.IsRain).ToColumn("is_rain");
             Map(o => o.TimeAdd).ToColumn("time_add");
         }
     }

@@ -8,8 +8,8 @@ namespace SmartWeatherBot.Models
     public class Weather
     {
         public long Index { get; set; } = -1;
-        public double Lat { get; set; } = 55.753215;
-        public double Lon { get; set; } = 37.622504;
+        public double Lat { get; set; } = 0;
+        public double Lon { get; set; } = 0;
         /// <summary>
         /// Фактическая температура
         /// </summary>
@@ -34,6 +34,7 @@ namespace SmartWeatherBot.Models
         /// Давление атмосферное
         /// </summary>
         public int Pressure { get; set; } = 0;
+        public bool IsRain { get; set; } = false;
         public DateTime TimeAdd { get; set; } = DateTime.Now;
     }
 }

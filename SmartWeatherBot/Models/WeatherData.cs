@@ -34,8 +34,15 @@ namespace SmartWeatherBot.Models
         [JsonPropertyName("clouds")]
         public CloudState Clouds { get; set; }
 
+
         public class WeatherDescription
         {
+            /// <summary>
+            ///  ID группы погодного параметра
+            /// </summary>
+            [JsonProperty("id")]
+            [JsonPropertyName("id")]
+            public int Id { get; set; }
             /// <summary>
             ///  Группа погодных параметров (Дождь, Снег, Экстрим и др.)
             /// </summary>
