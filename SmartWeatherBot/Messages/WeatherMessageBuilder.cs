@@ -14,7 +14,8 @@ namespace SmartWeatherBot.Messages
             return $"Текущая температура: {weather.Temp} \r\n" +
                 $"Ощущается как: {weather.TempLike} \r\n" +
                 $"Скорость ветра: {weather.WindSpeed} м/с \r\n" +
-                $"Давление: {weather.Humidity} мм/ртс \r\n";
+                $"Влажность: {weather.Humidity} % \r\n" +
+                $"Давление: {weather.Pressure} мм/ртс \r\n";
         }
 
         public static string Smart(Weather weather)
